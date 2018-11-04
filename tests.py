@@ -34,3 +34,17 @@ class CinemaTests(TestCase):
         self.assertEqual(seat_costs[Twin], get_seat_cost(row=A, column=5))
         self.assertEqual(seat_costs[Twin], get_seat_cost(row=B, column=10))
         self.assertEqual(seat_costs[Twin], get_seat_cost(row=B, column=13))
+
+    def test_seat_is_valid(self):
+        # valid
+        self.assertTrue(seat_is_valid('a1'))
+        self.assertTrue(seat_is_valid('A1'))
+        self.assertTrue(seat_is_valid('P7'))
+        self.assertTrue(seat_is_valid('e20'))
+
+        # not valid
+        self.assertFalse(seat_is_valid('a21'))
+        self.assertFalse(seat_is_valid('a40'))
+        self.assertFalse(seat_is_valid('Q21'))
+        self.assertFalse(seat_is_valid('z2'))
+        self.assertFalse(seat_is_valid('a0'))

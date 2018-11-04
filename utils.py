@@ -63,6 +63,37 @@ def get_option(message, options):
     return int(option)
 
 
+def get_int(message):
+    number = input(message)
+    while (not number.isdigit()) or int(number) is 0:
+        print("Please input a valid number.")
+        number = input(message)
+    return int(number)
+
+
+def seat_is_valid(seat):
+    if len(seat) not in (2, 3):
+        return False
+    seat = list(seat)
+    seat[0] = seat[0].upper()
+    if seat[0] not in ROWS:
+        return False
+    col = str(''.join(seat[1:]))
+    if not col.isdigit():
+        return False
+    if int(col) not in tuple(range(1, 21)):
+        return False
+    return True
+
+
+def input_seat(message):
+    seat = input(message)
+    if not seat_is_valid(seat):
+        print("Please input a valid seat.")
+        return input_seat(message)
+    return seat.upper()
+
+
 def color(string, seat_type):
     try:
         from colorclass import Color, Windows

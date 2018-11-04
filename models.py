@@ -7,8 +7,12 @@ class Seat:
         self.column = column
         self.type = get_seat_type(row, column)
         self.cost = get_seat_cost(row, column)
+        self.name = row + str(column)
         self.is_reserved = False
         self.is_paid_for = False
+
+    def get_name(self):
+        return (self.name + '.').center(5)
 
     def is_taken(self):
         return self.is_reserved and self.is_paid_for
