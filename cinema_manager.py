@@ -6,6 +6,7 @@ seating_plan = []
 
 
 def get_total_sales():
+    """ calculate the total amount made from all sales so far"""
     total_sales = 0
     for row in seating_plan:
         for seat in row:
@@ -35,6 +36,7 @@ def print_seating_assignment():
 
 
 def get_seat(seat):
+    """ given a seat definition, like A6 find the actual seat in the seating_plan"""
     for row in seating_plan:
         for column in row:
             if seat == column.name:
@@ -42,7 +44,7 @@ def get_seat(seat):
 
 
 def pay_for_reserved_seat():
-    # make a payment for a reserved seat
+    """ make a payment for a reserved seat """
     print("\n\nMake payment")
     there_are_reserved_seats = print_reserved_seats()
     if not there_are_reserved_seats:
@@ -85,6 +87,7 @@ def buy_seat():
 
 
 def get_number_of_seats_left(category=None):
+    """ get the number of seats available. if a category is supplied, only seats in that category will be counted"""
     if category:
         seats_left_in_category = 0
         for row in seating_plan:
@@ -141,6 +144,7 @@ def print_reserved_seats():
 
 
 def enough_seats_in_row(seats_required, starting_at, category):
+    """ check that there are a clear number of required seats starting_at a point"""
     starting_at = list(starting_at)
     row = ord(starting_at[0]) - 65
     column = int(''.join(starting_at[1:])) - 1
@@ -155,6 +159,7 @@ def enough_seats_in_row(seats_required, starting_at, category):
 
 
 def get_seats(seats_required, starting_at):
+    """ get the seat list starting at a given seat """
     starting_at = list(starting_at)
     row = ord(starting_at[0]) - 65
     column = int(''.join(starting_at[1:])) - 1
@@ -163,13 +168,13 @@ def get_seats(seats_required, starting_at):
 
 
 def in_category(seat, category):
-    seat = list(seat)
-    seat[0] = ord(seat[0]) - 65
-    seat[1] = int(seat[1]) - 1
-    return seating_plan[seat[0]][seat[1]].type is category
+    """ check if a given seat is in this category """
+    seat = get_seat(seat)
+    return seat.type == category
 
 
 def pick_seats():
+    """ prompt a user to choose the seats they need """
     seats_left = get_number_of_seats_left()
     if seats_left is 0:
         print("There are no more seats left.")
@@ -261,6 +266,7 @@ def cancel_reservation():
 
 
 def present_options():
+    """ main application menu """
     option = get_option(message=OPTIONS_MESSAGE, options=(1, 2, 3, 4, 5, 6, 7))
     if option is 1:
         buy_seat()
